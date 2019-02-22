@@ -11,14 +11,14 @@ import random
 
 #Creación de variables
 interval = 10
-number = random.expovariate(1.0 / interval)
 RAM = 100 #Capacidad de memoria RAM
+number = random.expovariate(1.0 / interval)
 CPU = 1 #unidad de tiempo
 procesos = 25 #procesos a realizar
 
 
 
-def proceso(nombre, env, interval, cpu):
+def proceso(nombre, env, interval, cpu,ram):
 
     global totalDia  # :( mala practica, pero ni modo
 
@@ -36,10 +36,11 @@ def proceso(nombre, env, interval, cpu):
     # ahora se dirige a la bomba de gasolina,
     # pero si hay otros carros, debe hacer cola
     with cpu.request() as turno:
-        yield turno  # ya puso la manguera de gasolina en el carro!
-        yield env.timeout(tiempoGas)  # hecha gasolina por un tiempo
-        print('%s sale del proceso a las %f' % (nombre, env.now))
-        # aqui el carro hace un release automatico de la bomba de gasolina
+        with ram.request() as turno2:
+            yield turno  # ya puso la manguera de gasolina en el carro!
+            yield env.timeout(tiempoGas)  # hecha gasolina por un tiempo
+            print('%s sale del proceso a las %f' % (nombre, env.now))
+            # aqui el carro hace un release automatico de la bomba de gasolina
 
     tiempoTotal = env.now - horaLlegada
     print('%s se tardo %f' % (nombre, tiempoTotal))
@@ -53,7 +54,7 @@ cpu_resource = simpy.Resource(env, capacity=CPU) # CPU a tulizar
 
 totalDia = 0
 for i in range(5):
-    env.process(proceso('Proceso %d' % i, env, number, cpu_resource))
+    env.process(proceso('Proceso %d' % i, env, number, cpu_resource,RAM))
 
 env.run(until=procesos)  # correr la simulación hasta el tiempo = 50
 
