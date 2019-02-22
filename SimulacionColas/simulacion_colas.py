@@ -18,12 +18,12 @@ procesos = 25 #procesos a realizar
 
 
 
-def proceso(nombre, env, ram, cpu):
+def proceso(nombre, env, interval, cpu):
 
     global totalDia  # :( mala practica, pero ni modo
 
     # Simular que esta conduciendo un tiempo antes de llegar a la gasolinera
-    yield env.timeout(ram)
+    yield env.timeout(interval)
 
     # llegando a la gasolinera
     horaLlegada = env.now
@@ -53,7 +53,7 @@ cpu_resource = simpy.Resource(env, capacity=CPU) # CPU a tulizar
 
 totalDia = 0
 for i in range(5):
-    env.process(proceso('Proceso %d' % i, env, RAM, cpu_resource))
+    env.process(proceso('Proceso %d' % i, env, number, cpu_resource))
 
 env.run(until=procesos)  # correr la simulación hasta el tiempo = 50
 
