@@ -16,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/simulacion_colas.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+            <state relative-caret-position="352">
+              <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
               <folding>
                 <element signature="e#130#142#0" expanded="true" />
               </folding>
@@ -170,7 +170,21 @@
       <option name="project" value="LOCAL" />
       <updated>1550857993768</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="agregando proceso de RAM">
+      <created>1550858383111</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1550858383111</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Agregando proceso de RAM">
+      <created>1550859198168</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1550859198168</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -202,7 +216,9 @@
     <MESSAGE value="subiendo estructura del códifo" />
     <MESSAGE value="." />
     <MESSAGE value="agregando RAM" />
-    <option name="LAST_COMMIT_MESSAGE" value="agregando RAM" />
+    <MESSAGE value="agregando proceso de RAM" />
+    <MESSAGE value="Agregando proceso de RAM" />
+    <option name="LAST_COMMIT_MESSAGE" value="Agregando proceso de RAM" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/simpy/events.py">
@@ -214,8 +230,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/simulacion_colas.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+        <state relative-caret-position="352">
+          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
           <folding>
             <element signature="e#130#142#0" expanded="true" />
           </folding>

@@ -59,8 +59,9 @@ def proceso(nombre, env, interval, cpu,ram):
 
 env = simpy.Environment()  #ambiente de simulación
 cpu_resource = simpy.Resource(env, capacity=CPU) # CPU a tulizar
-ram_resource = simpy.Resource(env, capacity=RAM) # CPU a tulizar
+ram_resource = simpy.Resource(env, capacity=RAM) # RAM a tulizar
 totalDia = 0
+
 for i in range(5):
     env.process(proceso('Proceso %d' % i, env, number, cpu_resource,ram_resource))
 
