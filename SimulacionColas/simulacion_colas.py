@@ -30,15 +30,19 @@ def proceso(nombre, env, interval, cpu,ram):
 
     # simular que necesita un tiempo para cargar gasolina. Probablemente
     # si es carro pequeño necesita menos tiempo y si es carro grande mas tiempo
-    tiempoGas = random.randint(1, 7)
-    print('%s inicia a las %f nececita %d para completar el proceso' % (nombre, horaLlegada, tiempoGas))
+    tiempoCPU = random.randint(1, 7)
+    tiempoRam = random.randint(1,7)
+    print('%s inicia a las %f nececita %d para completar el proceso' % (nombre, horaLlegada, tiempoCPU))
 
     # ahora se dirige a la bomba de gasolina,
     # pero si hay otros carros, debe hacer cola
-    with cpu.request() as turno:
-        with ram.request() as turno2:
-            yield turno  # ya puso la manguera de gasolina en el carro!
-            yield env.timeout(tiempoGas)  # hecha gasolina por un tiempo
+    with cpu.request() as turno_cpu:
+        yield turno_cpu  # ya puso la manguera de gasolina en el carro!
+        yield env.timeout(tiempoCPU)  # hecha gasolina por un tiempo
+
+        with ram.request() as turno_ram:
+            yield turno_ram
+            yield env.timeout(tiempoRam)
             print('%s sale del proceso a las %f' % (nombre, env.now))
             # aqui el carro hace un release automatico de la bomba de gasolina
 
@@ -58,4 +62,4 @@ for i in range(5):
 
 env.run(until=procesos)  # correr la simulación hasta el tiempo = 50
 
-print("tiempo promedio del proceso es: ", totalDia / 5.0)
+print("tiempo promedio del proceso es: ", totalDia / procesos)
