@@ -30,8 +30,8 @@ def proceso(nombre, env, interval, cpu,ram):
 
     # simular que necesita un tiempo para cargar gasolina. Probablemente
     # si es carro pequeño necesita menos tiempo y si es carro grande mas tiempo
-    tiempoCPU = random.randint(1, 7)
-    tiempoRam = random.randint(1,7)
+    tiempoCPU = random.randint(1, 3)
+    tiempoRam = random.randint(1,5)
     print('%s inicia a las %f nececita %d para completar el proceso' % (nombre, horaLlegada, tiempoCPU))
 
     # ahora se dirige a la bomba de gasolina,
@@ -39,12 +39,16 @@ def proceso(nombre, env, interval, cpu,ram):
     with cpu.request() as turno_cpu:
         yield turno_cpu  # ya puso la manguera de gasolina en el carro!
         yield env.timeout(tiempoCPU)  # hecha gasolina por un tiempo
+        try:
 
-        with ram.request() as turno_ram:
-            yield turno_ram
-            yield env.timeout(tiempoRam)
-            print('%s sale del proceso a las %f' % (nombre, env.now))
-            # aqui el carro hace un release automatico de la bomba de gasolina
+            with ram.request() as turno_ram:
+                yield turno_ram
+                yield env.timeout(tiempoRam)
+
+                print('%s sale del proceso a las %f' % (nombre, env.now))
+
+        except Exception:
+            print(Exception)
 
     tiempoTotal = env.now - horaLlegada
     print('%s se tardo %f' % (nombre, tiempoTotal))
@@ -55,10 +59,10 @@ def proceso(nombre, env, interval, cpu,ram):
 
 env = simpy.Environment()  #ambiente de simulación
 cpu_resource = simpy.Resource(env, capacity=CPU) # CPU a tulizar
-
+ram_resource = simpy.Resource(env, capacity=RAM) # CPU a tulizar
 totalDia = 0
 for i in range(5):
-    env.process(proceso('Proceso %d' % i, env, number, cpu_resource,RAM))
+    env.process(proceso('Proceso %d' % i, env, number, cpu_resource,ram_resource))
 
 env.run(until=procesos)  # correr la simulación hasta el tiempo = 50
 
