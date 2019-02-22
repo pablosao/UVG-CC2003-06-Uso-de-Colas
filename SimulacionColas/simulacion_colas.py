@@ -1,4 +1,5 @@
 """
+Utilizando una distribución exponencial
 
 @author: Pablo Sao
 @author: Amado García
@@ -6,7 +7,11 @@
 """
 #Importando Librerias
 import simpy
+import random
 
 #Creación de variables
-intervalo = 10
-
+interval = 10
+number = random.expovariate(1.0 / interval)
+RAM = 100 #Capacidad de memoria RAM
+CPU = 1 #unidad de tiempo
+procesos = 25 #procesos a realizar
