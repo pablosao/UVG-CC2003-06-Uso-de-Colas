@@ -1,7 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+<<<<<<< HEAD
 # In[44]:
+=======
+# 
+# ###  @author: Pablo Sao
+#  @author: Amado García
+# ### @date: 22-02-2019
+# 
+
+# In[32]:
+>>>>>>> b1bb04329bf96fbda94265f26b601dc4deb4bd7e
 
 
 
@@ -66,10 +76,17 @@ cpu_resource = simpy.Resource(env, capacity=CPU) # CPU a tulizar
 ram_resource = simpy.Resource(env, capacity=RAM) # RAM a tulizar
 totalDia = 0
 
+<<<<<<< HEAD
 for i in range(25):
     proc = env.process(proceso('Proceso %d' % i, env, random.expovariate(1.0 / 10), cpu_resource,ram_resource))
 
 env.run()  
+=======
+for i in range(procesos):
+    env.process(proceso('Proceso %d' % i, env, random.expovariate(1.0 / interval), cpu_resource,ram_resource))
+
+env.run(until = procesos)  
+>>>>>>> b1bb04329bf96fbda94265f26b601dc4deb4bd7e
 
 print("tiempo promedio del proceso es: ", totalDia / procesos)
 
