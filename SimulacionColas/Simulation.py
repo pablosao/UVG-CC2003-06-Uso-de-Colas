@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-
-
+# In[75]:
 
 
 
@@ -18,12 +17,16 @@ interval = 10
 RAM = 100 #Capacidad de memoria RAM
 CPU = 1 #unidad de tiempo
 procesos = 25 #procesos a realizar
+pro = list()
+cpuTime = list()
+ramTime = list()
 
 
 
 def proceso(nombre, env, interval, cpu,ram):
 
-    global totalDia  # :( mala practica, pero ni modo
+    global totalDia  # :( mala practica, pero ni modo\
+    global counter
 
     # Simular que esta conduciendo un tiempo antes de llegar a la gasolinera
     yield env.timeout(interval)
@@ -47,6 +50,11 @@ def proceso(nombre, env, interval, cpu,ram):
             with ram.request() as turno_ram:
                 yield turno_ram
                 yield env.timeout(tiempoRam)
+          
+             
+               
+               
+                
                 print('%s inicia a las %f necesita %d para Ingresar al cpu' % (nombre, horaLlegada, tiempoCPU))
                 print('%s continua a las %f necesita %d para completar el proceso' % (nombre, horaLlegada + tiempoCPU, tiempoRam))
                 print('%s sale del proceso a las %f' % (nombre, env.now))
@@ -54,9 +62,14 @@ def proceso(nombre, env, interval, cpu,ram):
 
         except Exception:
             print(Exception)
+   
     tiempoTotal = env.now - horaLlegada
     print('%s se tardo %f' % (nombre, tiempoCPU + tiempoRam))
     totalDia = totalDia + tiempoTotal
+    pro.insert(counter, nombre)
+    cpuTime.insert(counter, tiempoCPU)
+    ramTime.insert(counter, tiempoRam)
+    counter = counter + 1
     
 
 
@@ -72,7 +85,11 @@ for i in range(25):
 
 env.run()  
 
+print("tiempo promedio del proceso es: ", totalDia / procesos)
 
+
+
+# In[ ]:
 
 
 
