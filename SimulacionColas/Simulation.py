@@ -1,16 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# 
-# ###  @author: Pablo Sao
-# ### @author: Amado García
-# ### @date: 22-02-2019
-# 
-
-# In[32]:
+# In[44]:
 
 
 
+###  @author: Pablo Sao
+### @author: Amado García
+### @date: 22-02-2019
 #Importando Librerias
 import simpy
 import random
@@ -70,9 +67,9 @@ ram_resource = simpy.Resource(env, capacity=RAM) # RAM a tulizar
 totalDia = 0
 
 for i in range(25):
-    env.process(proceso('Proceso %d' % i, env, random.expovariate(1.0 / 10), cpu_resource,ram_resource))
+    proc = env.process(proceso('Proceso %d' % i, env, random.expovariate(1.0 / 10), cpu_resource,ram_resource))
 
-env.run(until = 25)  
+env.run()  
 
 print("tiempo promedio del proceso es: ", totalDia / procesos)
 
