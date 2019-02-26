@@ -3,7 +3,7 @@
 
 # 
 # ###  @author: Pablo Sao
-# ### @author: Amado García
+#  @author: Amado García
 # ### @date: 22-02-2019
 # 
 
@@ -69,10 +69,10 @@ cpu_resource = simpy.Resource(env, capacity=CPU) # CPU a tulizar
 ram_resource = simpy.Resource(env, capacity=RAM) # RAM a tulizar
 totalDia = 0
 
-for i in range(25):
-    env.process(proceso('Proceso %d' % i, env, random.expovariate(1.0 / 10), cpu_resource,ram_resource))
+for i in range(procesos):
+    env.process(proceso('Proceso %d' % i, env, random.expovariate(1.0 / interval), cpu_resource,ram_resource))
 
-env.run(until = 25)  
+env.run(until = procesos)  
 
 print("tiempo promedio del proceso es: ", totalDia / procesos)
 
