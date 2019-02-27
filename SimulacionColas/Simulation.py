@@ -1,32 +1,47 @@
-#!/usr/bin/env python
-# coding: utf-8
+'''
 
-# In[75]:
+@author: Pablo Sao
+@author: Amado García
+@date: 22-02-2019
+'''
 
 
-
-###  @author: Pablo Sao
-### @author: Amado García
-### @date: 22-02-2019
 #Importando Librerias
 import simpy
 import random
+import graficas
 
 #Creación de variables
-interval = 10
+INTERVALO = 10
 RAM = 100 #Capacidad de memoria RAM
 CPU = 1 #unidad de tiempo
-procesos = 25 #procesos a realizar
-pro = list()
-cpuTime = list()
-ramTime = list()
+PROCESOS = 25 #procesos a realizar
+
+totalProcesos = 0
+counter = 0
+
+
+#Listas para ploteo de graficas
+pro = list()  #lista de procesos
+cpuTime = list() #lista que contiene el tiempo de cpu
+ramTime = list() #lista que contiene el tiempo de ram
 
 
 
 def proceso(nombre, env, interval, cpu,ram):
+    '''
+
+    :param nombre:
+    :param env:
+    :param interval:
+    :param cpu:
+    :param ram:
+    :return:
+    '''
 
     global totalDia  # :( mala practica, pero ni modo\
     global counter
+    global totalProcesos
 
     # Simular que esta conduciendo un tiempo antes de llegar a la gasolinera
     yield env.timeout(interval)
@@ -34,27 +49,21 @@ def proceso(nombre, env, interval, cpu,ram):
     # llegando a la gasolinera
     horaLlegada = env.now
 
-    # simular que necesita un tiempo para cargar gasolina. Probablemente
-    # si es carro pequeño necesita menos tiempo y si es carro grande mas tiempo
+    # Variables para simular el tiempo que tarda en realizar un proceso la CPU y la RAM
     tiempoCPU = random.randint(1, 3)
     tiempoRam = random.randint(1,5)
    
    
-    # ahora se dirige a la bomba de gasolina,
-    # pero si hay otros carros, debe hacer cola
+    # Iniciamos el proceso del CPU, si ya esta ocupado por otro proceso, espera hasta ser liberado
     with cpu.request() as turno_cpu:
         yield turno_cpu  # ya puso la manguera de gasolina en el carro!
         yield env.timeout(tiempoCPU)  # hecha gasolina por un tiempo
         try:
-
+            # Iniciamos el proceso de la RAM si ya esta ocupado por otro proceso, espera hasta ser liberado
             with ram.request() as turno_ram:
                 yield turno_ram
                 yield env.timeout(tiempoRam)
           
-             
-               
-               
-                
                 print('%s inicia a las %f necesita %d para Ingresar al cpu' % (nombre, horaLlegada, tiempoCPU))
                 print('%s continua a las %f necesita %d para completar el proceso' % (nombre, horaLlegada + tiempoCPU, tiempoRam))
                 print('%s sale del proceso a las %f' % (nombre, env.now))
@@ -65,10 +74,10 @@ def proceso(nombre, env, interval, cpu,ram):
    
     tiempoTotal = env.now - horaLlegada
     print('%s se tardo %f' % (nombre, tiempoCPU + tiempoRam))
-    totalDia = totalDia + tiempoTotal
-    pro.insert(counter, nombre)
-    cpuTime.insert(counter, tiempoCPU)
-    ramTime.insert(counter, tiempoRam)
+    totalProcesos = totalProcesos + tiempoTotal
+    pro.append(counter)
+    cpuTime.append( tiempoCPU)
+    ramTime.append( tiempoRam)
     counter = counter + 1
     
 
@@ -76,21 +85,18 @@ def proceso(nombre, env, interval, cpu,ram):
 # ----------------------
 
 env = simpy.Environment()  #ambiente de simulación
-cpu_resource = simpy.Resource(env, capacity=CPU) # CPU a tulizar
-ram_resource = simpy.Resource(env, capacity=RAM) # RAM a tulizar
-totalDia = 0
+cpu_resource = simpy.Resource(env, capacity=CPU) # ambiente del CPU a tulizar
+ram_resource = simpy.Resource(env, capacity=RAM) # ambiente de la RAM a tulizar
 
 for i in range(25):
-    proc = env.process(proceso('Proceso %d' % i, env, random.expovariate(1.0 / 10), cpu_resource,ram_resource))
+    proc = env.process(proceso('Proceso %d' % i, env, random.expovariate(1.0 / INTERVALO), cpu_resource,ram_resource))
 
-env.run()  
+env.run()
 
-print("tiempo promedio del proceso es: ", totalDia / procesos)
+proceso = round(totalProcesos / PROCESOS,2)
 
+print("tiempo promedio del proceso es: ", proceso)
 
-
-# In[ ]:
-
-
-
-
+graficas.plotear(proceso,pro)
+graficas.plotear(proceso,cpuTime)
+graficas.plotear(proceso,ramTime)
