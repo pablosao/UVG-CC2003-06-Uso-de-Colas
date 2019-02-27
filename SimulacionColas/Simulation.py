@@ -102,4 +102,4 @@ print("tiempo promedio del proceso es: ", proceso)
 
 
 #graficas.plotear(proceso,pro)
-graficas.plotear(proceso,cpuTime,ramTime)
+graficas.plotear(proceso,cpuTime,"CPU",ramTime,"RAM")
