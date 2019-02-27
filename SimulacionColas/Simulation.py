@@ -17,6 +17,8 @@ RAM = 100 #Capacidad de memoria RAM
 CPU = 1 #unidad de tiempo
 PROCESOS = 25 #procesos a realizar
 
+#Variables que cambiaran durante el tiempo de ejecución
+
 totalProcesos = 0
 counter = 0
 
@@ -51,7 +53,7 @@ def proceso(nombre, env, interval, cpu,ram):
 
     # Variables para simular el tiempo que tarda en realizar un proceso la CPU y la RAM
     tiempoCPU = random.randint(1, 3)
-    tiempoRam = random.randint(1,5)
+    tiempoRam = random.randint(1, 5)
    
    
     # Iniciamos el proceso del CPU, si ya esta ocupado por otro proceso, espera hasta ser liberado
@@ -76,8 +78,8 @@ def proceso(nombre, env, interval, cpu,ram):
     print('%s se tardo %f' % (nombre, tiempoCPU + tiempoRam))
     totalProcesos = totalProcesos + tiempoTotal
     pro.append(counter)
-    cpuTime.append( tiempoCPU)
-    ramTime.append( tiempoRam)
+    cpuTime.append(tiempoCPU)
+    ramTime.append(tiempoRam)
     counter = counter + 1
     
 
@@ -97,6 +99,7 @@ proceso = round(totalProcesos / PROCESOS,2)
 
 print("tiempo promedio del proceso es: ", proceso)
 
-graficas.plotear(proceso,pro)
-graficas.plotear(proceso,cpuTime)
-graficas.plotear(proceso,ramTime)
+
+
+#graficas.plotear(proceso,pro)
+graficas.plotear(proceso,cpuTime,ramTime)
