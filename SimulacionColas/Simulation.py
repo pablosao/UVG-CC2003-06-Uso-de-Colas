@@ -24,6 +24,7 @@ def process_Generator(env,intervalo,pQuantity):
 def ram_Request(name, env):
     global instructions
     global ramProcess
+
     instructions.insert(int(name), random.randint(1,10))
     print('Process %s is in new state at %s' % (name, env.now))
 
@@ -41,7 +42,7 @@ def ram_Request(name, env):
 def cpu_Request(name, env):
     global cpu_Queue
 
-    valor = 0
+
     yield env.timeout(0.5)
     print('Process %s is in Ready mode at %s' % (name, env.now))
     print('Process %s requested the CPU' %(name))
@@ -57,13 +58,12 @@ def cpu_Request(name, env):
             yield env.timeout(1) 
             cpu_Queue.insert(0,name)
 
-        valor = env.now
-        listCPU.append(valor)
+
+        listCPU.append(env.now)
         print('Process %s leaves the CPU at %s' % (name, env.now))
         del cpu_Queue[len(cpu_Queue) - 1]
         instructions[int(name)] = instructions[int(name)]- 3
-        print('Process %s has %s instructions left' % (name, instructions[int(name)] ))       
-
+        print('Process %s has %s instructions left' % (name, instructions[int(name)] ))
 
 
         
@@ -82,8 +82,7 @@ listRAM = list()
 cpu_Queue = []
 instructions = []
 ramProcess = []
-process_Quantity = 25
-process_Quantity2 = 50
+process_Quantity = 200
 
 process_gen = env.process(process_Generator(env,INTERVALO,process_Quantity))
 env.run()

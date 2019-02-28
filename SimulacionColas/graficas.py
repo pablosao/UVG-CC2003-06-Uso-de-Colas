@@ -33,12 +33,16 @@ def plotear(intervalo,datos1,titulo_dato1):
 
     plot.title("Gráfica de {0}".format(titulo_dato1))
     plot.plot(intervalo1,datos1,linestyle='--', marker='o', color='b')
+
     '''
     # Seteamos los datos de la segunda grafica
     plot.subplot(2, 2, 2)
     plot.title("Gráfica de {0}".format(titulo_dato2))
     plot.plot(intervalo2, datos2, linestyle='--', marker='o', color='r')
     '''
+
+    plot.xlabel('Intervalos')
+    plot.ylabel('Tiempo')
 
     #mostramos la grafica
     plot.show()
