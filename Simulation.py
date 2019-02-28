@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[145]:
+# In[50]:
 
 
 import simpy
@@ -19,11 +19,18 @@ def process_Generator(env):
 #Ask for RAM
 def ram_Request(name, env):
     global instructions
+    global ramProcess
     instructions.insert(int(name), random.randint(1,10))
     print('Process %s is in new state at %s' % (name, env.now))
     print('Process %s requested the RAM' % (name))
-    yield RAM.get(random.randint(1,10))
-    print(RAM.level,"RAM available")
+    if RAM.level < instructions[name]:
+        print("Proces %s requires %s ram space, but there's only %s RAM available, getting back to queue" %(name, instructions[name], RAM.level))
+        cpu_Queue.insert(len(cpu_Queue) - 1, cpu_Queue)
+    else:
+        tempRam = RAM.get(random.randint(1,10))
+        yield tempRam
+        ramProcess.insert(int(name), tempRam)
+        print(RAM.level,"RAM available")
     
         
 #Asks for CPU disponibility
@@ -39,11 +46,10 @@ def cpu_Request(name, env):
         cpu_Queue.insert(0,name)
         yield req
         print('Process %s is running now' % (name))
-        print(instructions[name] - 3 <= 0)
         if(instructions[name] - 3 <= 0):
             yield env.timeout(instructions[name])
         else:
-            yield env.timeout(3) 
+            yield env.timeout(1) 
             cpu_Queue.insert(0,name)
         print('Process %s leaves the CPU at %s' % (name, env.now))
         del cpu_Queue[len(cpu_Queue) - 1]
@@ -57,6 +63,7 @@ CPU = simpy.Resource(env, capacity=1)
 RAM = simpy.Container(env, init=100, capacity=100)
 cpu_Queue = []
 instructions = []
+ramProcess = []
 process_Quantity = 25
 process_gen = env.process(process_Generator(env))
 env.run()
