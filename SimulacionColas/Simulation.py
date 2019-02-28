@@ -82,11 +82,10 @@ listRAM = list()
 cpu_Queue = []
 instructions = []
 ramProcess = []
-process_Quantity = 200
+process_Quantity = 25
 
 process_gen = env.process(process_Generator(env,INTERVALO,process_Quantity))
 env.run()
-print(listCPU)
 graficas.plotear(process_Quantity, listCPU, "CPU")
 
 
