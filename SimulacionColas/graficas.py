@@ -8,7 +8,7 @@ Desplegadas de forma independiente en una misma ventana
 #Importando libreria para graficar
 import matplotlib.pyplot as plot
 
-def plotear(intervalo,datos1,titulo_dato1,datos2,titulo_dato2):
+def plotear(intervalo,datos1,titulo_dato1):
     '''
     Graficación de dos listas de datos distintas que comparten un intervalo
 
@@ -21,28 +21,30 @@ def plotear(intervalo,datos1,titulo_dato1,datos2,titulo_dato2):
     '''
 
     #Obtenemos los intervalos de cada uno de los valores de la lista
-    intervalo1 = getIntervalos(intervalo,len(datos1))
-    intervalo2 = getIntervalos(intervalo,len(datos2))
+    intervalo1 = getIntervalos(intervalo)
+    #intervalo2 = getIntervalos(intervalo,len(datos2))
 
 
     plot.figure()
 
     #Seteamos los datos de la primera grafica
 
-    plot.subplot(2,2,1)
+    #plot.subplot(2,2,1)
+    
     plot.title("Gráfica de {0}".format(titulo_dato1))
     plot.plot(intervalo1,datos1,linestyle='--', marker='o', color='b')
-
+    '''
     # Seteamos los datos de la segunda grafica
     plot.subplot(2, 2, 2)
     plot.title("Gráfica de {0}".format(titulo_dato2))
     plot.plot(intervalo2, datos2, linestyle='--', marker='o', color='r')
+    '''
 
     #mostramos la grafica
     plot.show()
 
 
-def getIntervalos(intervalo,cantidad_datos):
+def getIntervalos(intervalo):
     '''
     Obtención de la lista de intervalos para una lista
 
@@ -55,10 +57,10 @@ def getIntervalos(intervalo,cantidad_datos):
     datos = list()
     intervalos = 0
 
-    for control in range(cantidad_datos):
+    for control in range(intervalo):
         #al valor del intervalos, se sumamos el factor de intervalo para cada cantidad de la lista
-        intervalos = intervalos + intervalo
+        intervalos = intervalos + 1
         #Agregamos el valor a una lista
-        datos.append(round(intervalos,2))
+        datos.append(intervalos)
 
     return datos
