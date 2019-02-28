@@ -30,7 +30,7 @@ def plotear(intervalo,datos1,titulo_dato1):
     #Seteamos los datos de la primera grafica
 
     #plot.subplot(2,2,1)
-    
+
     plot.title("Gráfica de {0}".format(titulo_dato1))
     plot.plot(intervalo1,datos1,linestyle='--', marker='o', color='b')
     '''

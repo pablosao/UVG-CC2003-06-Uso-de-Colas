@@ -11,11 +11,14 @@ from random import seed
 seed(123)
   
 #Generates the process
-def process_Generator(env,intervalo):
-    for i in range(process_Quantity):
+def process_Generator(env,intervalo,pQuantity):
+
+    for i in range(pQuantity):
         yield env.timeout(intervalo)
         env.process(ram_Request(i, env))
         env.process(cpu_Request(i, env))
+
+
 
 #Ask for RAM
 def ram_Request(name, env):
@@ -37,8 +40,8 @@ def ram_Request(name, env):
 #Asks for CPU disponibility
 def cpu_Request(name, env):
     global cpu_Queue
-    global listCPU
 
+    valor = 0
     yield env.timeout(0.5)
     print('Process %s is in Ready mode at %s' % (name, env.now))
     print('Process %s requested the CPU' %(name))
@@ -54,12 +57,15 @@ def cpu_Request(name, env):
             yield env.timeout(1) 
             cpu_Queue.insert(0,name)
 
-        listCPU.append(env.now)
+        valor = env.now
+        listCPU.append(valor)
         print('Process %s leaves the CPU at %s' % (name, env.now))
         del cpu_Queue[len(cpu_Queue) - 1]
         instructions[int(name)] = instructions[int(name)]- 3
         print('Process %s has %s instructions left' % (name, instructions[int(name)] ))       
-        
+
+
+
         
 #Simpy enviroment 
 env = simpy.Environment()
@@ -77,11 +83,12 @@ cpu_Queue = []
 instructions = []
 ramProcess = []
 process_Quantity = 25
-process_gen = env.process(process_Generator(env,INTERVALO))
+process_Quantity2 = 50
+
+process_gen = env.process(process_Generator(env,INTERVALO,process_Quantity))
 env.run()
-
-
-graficas.plotear(process_Quantity,listCPU,"CPU")
+print(listCPU)
+graficas.plotear(process_Quantity, listCPU, "CPU")
 
 
  
