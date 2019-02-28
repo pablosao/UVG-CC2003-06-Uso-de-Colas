@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7731d7e8-6431-40f8-8659-769d9fec5ae2" name="Default Changelist" comment="" />
+    <list default="true" id="7731d7e8-6431-40f8-8659-769d9fec5ae2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,9 +21,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Simulation.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="344">
+              <caret line="104" column="51" selection-start-line="104" selection-start-column="51" selection-end-line="104" selection-end-column="51" />
+              <folding>
+                <element signature="e#92#104#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/graficas.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="32" lean-forward="true" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -32,6 +50,11 @@
         <option value="Python Script" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>counter</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -45,6 +68,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/simulacion_colas.py" />
+        <option value="$PROJECT_DIR$/Simulation.py" />
+        <option value="$PROJECT_DIR$/graficas.py" />
       </list>
     </option>
   </component>
@@ -74,6 +99,9 @@
       </pane>
     </panes>
   </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Simulation.py" />
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -99,7 +127,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/simulacion_colas.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Simulation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -181,7 +209,28 @@
       <option name="project" value="LOCAL" />
       <updated>1550859225718</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Subiendo graficación de tiempos">
+      <created>1551228078760</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1551228078760</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Mostrando gráfica de CPU y RAM en una misma ventana">
+      <created>1551229289458</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1551229289458</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Comentando código y agregando el titulo a las gráficas">
+      <created>1551230341054</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1551230341054</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -197,7 +246,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.32876712" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32876712" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
@@ -214,7 +263,10 @@
     <MESSAGE value="agregando RAM" />
     <MESSAGE value="agregando proceso de RAM" />
     <MESSAGE value="Agregando proceso de RAM" />
-    <option name="LAST_COMMIT_MESSAGE" value="Agregando proceso de RAM" />
+    <MESSAGE value="Subiendo graficación de tiempos" />
+    <MESSAGE value="Mostrando gráfica de CPU y RAM en una misma ventana" />
+    <MESSAGE value="Comentando código y agregando el titulo a las gráficas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Comentando código y agregando el titulo a las gráficas" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/simulacion_colas.py" />
@@ -226,7 +278,21 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Simulation.py">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="104" column="51" selection-start-line="104" selection-start-column="51" selection-end-line="104" selection-end-column="51" />
+          <folding>
+            <element signature="e#92#104#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graficas.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="32" lean-forward="true" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
