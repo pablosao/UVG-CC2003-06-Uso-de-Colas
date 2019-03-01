@@ -35,6 +35,7 @@ def ram_Request(name, env):
     else:
         tempRam = RAM.get(random.randint(1,10))
         yield tempRam
+        
         ramProcess.insert(int(name), tempRam)
         print(RAM.level,"RAM available")
         
@@ -47,23 +48,31 @@ def cpu_Request(name, env):
     print('Process %s is in Ready mode at %s' % (name, env.now))
     print('Process %s requested the CPU' %(name))
     print('Process %s has %s instructions' %(name, instructions[int(name)]))
-    with CPU.request() as req:
-        print('Procesos en cola: %s' % (len(cpu_Queue)))
-        cpu_Queue.insert(0,name)
-        yield req
-        print('Process %s is running now' % (name))
-        if(instructions[name] - 3 <= 0):
-            yield env.timeout(instructions[name])
-        else:
-            yield env.timeout(1) 
+
+    #verificando si se ejecuta o no la instrucción
+    desicion = random.randint(1, 2)
+
+    #Si el valor es 2, realiza la operación, de lo contrario se deja pendiente
+    if (desicion == 2):
+
+        with CPU.request() as req:
+            print('Procesos en cola: %s' % (len(cpu_Queue)))
             cpu_Queue.insert(0,name)
+            yield req
+
+            print('Process %s is running now' % (name))
+            if(instructions[name] - 3 <= 0):
+                yield env.timeout(instructions[name])
+            else:
+                yield env.timeout(1)
+                cpu_Queue.insert(0,name)
 
 
-        listCPU.append(env.now)
-        print('Process %s leaves the CPU at %s' % (name, env.now))
-        del cpu_Queue[len(cpu_Queue) - 1]
-        instructions[int(name)] = instructions[int(name)]- 3
-        print('Process %s has %s instructions left' % (name, instructions[int(name)] ))
+            listCPU.append(env.now)
+            print('Process %s leaves the CPU at %s' % (name, env.now))
+            del cpu_Queue[len(cpu_Queue) - 1]
+            instructions[int(name)] = instructions[int(name)]- 3
+            print('Process %s has %s instructions left' % (name, instructions[int(name)] ))
 
 
         
