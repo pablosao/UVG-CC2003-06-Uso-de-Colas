@@ -3,7 +3,7 @@
 
 # In[171]:
 
-
+##Codigo tomado de referencia en https://simpy.readthedocs.io/en/latest/topical_guides/resources.html#res-type-container y del ejemplo de la gasolinera subido a canvas por el Ing. Douglas Barrios
 import simpy
 import random
 import graficas
