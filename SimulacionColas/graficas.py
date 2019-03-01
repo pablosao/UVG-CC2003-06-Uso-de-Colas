@@ -41,7 +41,7 @@ def plotear(intervalo,datos1,titulo_dato1):
     plot.plot(intervalo2, datos2, linestyle='--', marker='o', color='r')
     '''
 
-    plot.xlabel('Intervalos')
+    plot.xlabel('Procesos')
     plot.ylabel('Tiempo')
 
     #mostramos la grafica
