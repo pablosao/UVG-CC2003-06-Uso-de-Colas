@@ -73,10 +73,8 @@ env.run()
 tiempoPromedio = tiempoPromedio / process_Quantity
 print("El tiempo promedio ", tiempoPromedio)
 
-for n in tiempos:
-    desvest = (n - tiempoPromedio)*(n - tiempoPromedio)
 
-desvest = desvest / process_Quantity
+desvest = tiempoPromedio / process_Quantity
 
 print("Desviacion estandar: ", desvest)
 
