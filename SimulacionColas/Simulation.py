@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[170]:
+# In[171]:
 
 
 import simpy
@@ -33,8 +33,8 @@ def Process(name, env,  cpu, ram):
             with CPU.request() as req:
                 yield req
                 print('Process %s is running now' % (name))
-                if((instructions - 3) <= 0):
-                    yield env.timeout((1/instructions))
+                if((instructions - 3) <= 0): ##change this if wanna change the instructions per Process
+                    yield env.timeout((1/instructions) * instructions)
                     instructions = instructions - instructions
                     print('Process %s is Terminated at %s' %(name, env.now))
                     tiempoPromedio = env.now
@@ -42,7 +42,7 @@ def Process(name, env,  cpu, ram):
                     RAM.put(ramProcess) 
                 else:
                     yield env.timeout(1)
-                    instructions = instructions - 3
+                    instructions = instructions - 3 ##change this if wanna change the instructions per Process
                     print('Process %s leaves the CPU at %s' % (name, env.now))
                     io = random.randint(1,2)
                     if io == 1:
@@ -81,7 +81,7 @@ desvest = desvest / process_Quantity
 print("Desviacion estandar: ", desvest)
 
 #Graphics generator
-#graficas.plotear(process_Quantity, listCPU, "CPU")
+graficas.plotear(process_Quantity, listCPU, "CPU")
 
 
 
